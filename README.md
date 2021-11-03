@@ -18,7 +18,9 @@
 
 GET
 http://localhost:3000/personal
+
 http://localhost:3000/personal/interno
+
 http://localhost:3000/personal/externo
 
 POST
@@ -113,6 +115,7 @@ EXAMPLE JSON
 PUT
 
 Reemplaza el "id_comentario" por un id valido registrado
+
 http://localhost:3000/comentarios/id_comentario
 
 EXAMPLE JSON
@@ -124,5 +127,6 @@ EXAMPLE JSON
 DELETE
 
 Reemplaza el "id_comentario" por un id valido registrado
+
 http://localhost:3000/comentarios/id_comentario
 
