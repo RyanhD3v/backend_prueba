@@ -9,7 +9,9 @@
 >npm install            --Install project dependencies
 
 >npm run dev            --Execute the application in developer mode, you can make modifications
+>
 >npm run build          --for the compiled the code in the folder dist
+>
 >npm run start          --Execute the application fronm /dist folder
 
 # Routes Personal
