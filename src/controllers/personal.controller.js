@@ -86,12 +86,8 @@ export const createPersonal = async (req, res) => {
             .input("direccion", sql.Text, direccion)
             .input("fecha_ingreso", sql.DateTime, fecha_ingreso)
             .input("tipo_usuario", sql.VarChar, tipo_usuario)
-            .input("estatus", sql.VarChar, estatus)
-
-            
-            
+            .input("estatus", sql.VarChar, estatus)            
             //.input("nameCampo", sql.Int, campoEntero)
-            
             .query(queries.createNewPersonal);
     
         res.json({ap_paterno, ap_materno, nombre, direccion, fecha_ingreso, tipo_usuario, estatus})
@@ -104,19 +100,31 @@ export const createPersonal = async (req, res) => {
 };
 //borrar Persona
 export const deletePersonalById = async(req, res) => {
-    const { id_personal } = req.params;
 
-    const pool = await getConnection();
-    const result = await pool
-        .request()
-        .input('id_personal', id_personal)
-        .query(queries.deletePersonal);
+    const{ id_personal } = req.params;
+    if (id_personal == null) {
+        return res.status(400).json({
+            msg: 'Bad request. Please add an valid ID'
+        });
+    }
     
-    res.sendStatus(204);
+    try {
+        const pool = await getConnection()
+        await pool
+            .request()
+            .input("id_personal", sql.Int, id_personal)
+            .query(queries.deletePersonal);
+    
+            res.json(`El usuario se elimino correctamente`);
+        
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
 };
 
 //Actualizar Persona
-export const updatePersonalById = async(req, res) => {
+export const updatePersonal = async(req, res) => {
 
     const{ ap_paterno, ap_materno, nombre, direccion, fecha_ingreso, tipo_usuario, estatus } = req.body;
     const{ id_personal } = req.params;
@@ -126,19 +134,25 @@ export const updatePersonalById = async(req, res) => {
         });
     }
 
-    const pool = await getConnection()
-    await pool
-        .request()
-        .input("ap_paterno", sql.VarChar, ap_paterno)
-        .input("ap_materno", sql.VarChar, ap_materno)
-        .input("nombre", sql.VarChar, nombre)
-        .input("direccion", sql.Text, direccion)
-        .input("fecha_ingreso", sql.DateTime, fecha_ingreso)
-        .input("tipo_usuario", sql.VarChar, tipo_usuario)
-        .input("estatus", sql.VarChar, estatus)
-        .input("id_personal", sql.Int, id_personal)
-        .query(queries.updatePersonalById);
-
-        res.json({ap_paterno, ap_materno, nombre, direccion, fecha_ingreso, tipo_usuario, estatus});
+    try {
+        const pool = await getConnection()
+        await pool
+            .request()
+            .input("ap_paterno", sql.VarChar, ap_paterno)
+            .input("ap_materno", sql.VarChar, ap_materno)
+            .input("nombre", sql.VarChar, nombre)
+            .input("direccion", sql.Text, direccion)
+            .input("fecha_ingreso", sql.DateTime, fecha_ingreso)
+            .input("tipo_usuario", sql.VarChar, tipo_usuario)
+            .input("estatus", sql.VarChar, estatus)
+            .input("id_personal", sql.Int, id_personal)
+            .query(queries.updatePersonalById);
+    
+            res.json({ap_paterno, ap_materno, nombre, direccion, fecha_ingreso, tipo_usuario, estatus});
+        
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
 };
 
