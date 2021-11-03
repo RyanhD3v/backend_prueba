@@ -3,7 +3,7 @@ import config from './config'
 
 import cors from 'cors'
 
-import productsRoutes from './routes/products.routes'
+import apiRoutes from './routes/api.routes'
 
 const app = express()
 
@@ -16,6 +16,6 @@ app.set('port', config.port)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(productsRoutes)
+app.use(apiRoutes)
 
 export default app

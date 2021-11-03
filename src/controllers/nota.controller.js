@@ -55,5 +55,55 @@ export const getNotas = async (req, res) => {
     }
 };
 //Actualizar Nota
+export const updateNota = async(req, res) => {
+
+    const{nombre, descripcion } = req.body;
+    const{ id_nota } = req.params;
+    if (nombre == null, descripcion === null) {
+        return res.status(400).json({
+            msg: 'Bad request. Update name and description'
+        });
+    }
+
+    try {
+        const pool = await getConnection()
+        await pool
+            .request()
+            .input("nombre", sql.VarChar, nombre)
+            .input("descripcion", sql.Text, descripcion)
+            .input("id_nota", sql.Int, id_nota)
+            .query(queries.updateNotaById);
+    
+            res.json(`Se actualizo la nota`);
+        
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
 
 //Eliminar Nota
+
+export const deleteNota = async(req, res) => {
+
+    const{ id_nota } = req.params;
+    if (id_nota == null) {
+        return res.status(400).json({
+            msg: 'Bad request. add an Id'
+        });
+    }
+
+    try {
+        const pool = await getConnection()
+        await pool
+            .request()
+            .input("id_nota", sql.Int, id_nota)
+            .query(queries.deleteNotaById);
+    
+            res.json(`Se elimino la nota`);
+        
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};

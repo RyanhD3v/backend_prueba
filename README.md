@@ -1,5 +1,11 @@
 # Instructions for Use
 
+# -------> Requirements
+    Node.Js LTS download here https://nodejs.org/es/
+    
+
+->from the console, go to the project folder and run the following commands
+
 >npm install            Install project dependencies
 
 >npm run dev            Execute the application in developer mode, you can make modifications
@@ -16,7 +22,7 @@ http://localhost:3000/personal/externo
 POST
 http://localhost:3000/personal
 
-# EXAMPLE JSON
+EXAMPLE JSON
 {
     "ap_paterno":"paterno",
     "ap_materno":"Materno",
@@ -33,7 +39,7 @@ remplaza "id_personal" por un numero id valido que ya este registrado
 
 http://localhost:3000/personal/id_personal
 
-# Example JSON
+Example JSON
 {
     "ap_paterno":"Barralez",
     "ap_materno":"Cortes",
@@ -45,6 +51,10 @@ http://localhost:3000/personal/id_personal
 }
 
 DELETE
+
+remplaza "id_personal" por un numero id valido que ya este registrado 
+
+http://localhost:3000/personal/id_personal
 
 
 # Routes Notas
@@ -65,6 +75,23 @@ http://localhost:3000/notas
     "id_personal":15
 }
 
+PUT
+
+remplaza "id_nota" por un numero id valido que ya este registrado
+
+http://localhost:3000/notas/id_nota
+
+{
+    "nombre":"Nota Actualizada",
+    "descripcion":"Esta es una nota actualizada"
+}
+
+DELETE
+
+remplaza "id_nota" por un numero id valido que ya este registrado
+
+http://localhost:3000/notas/id_nota
+
 # Routes Comentarios
 
 GET
@@ -73,7 +100,7 @@ http://localhost:3000/comentarios
 POST
 http://localhost:3000/comentarios
 
-# EXAMPLE JSON
+EXAMPLE JSON
 
 {
     "comentario":"Estoy agregando un nuevo comentario de prueba sobre una nota existente",
@@ -82,13 +109,18 @@ http://localhost:3000/comentarios
 }
 
 PUT
+
+Reemplaza el "id_comentario" por un id valido registrado
 http://localhost:3000/comentarios/id_comentario
 
-# EXAMPLE JSON
+EXAMPLE JSON
 
 {
     "comentario":"se actualizo el comentario del id que colocaste como parametro"
 }
 
 DELETE
+
+Reemplaza el "id_comentario" por un id valido registrado
+http://localhost:3000/comentarios/id_comentario
 

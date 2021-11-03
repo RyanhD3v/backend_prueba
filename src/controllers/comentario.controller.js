@@ -76,3 +76,14 @@ export const updateComentario = async(req, res) => {
 };
 
 //Eliminar comentarios
+export const deleteComentario = async(req, res) => {
+    const { id_comentario } = req.params;
+
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .input('id_comentario', id_comentario)
+        .query(queries.deleteComentarioById);
+
+    res.sendStatus(204);
+};

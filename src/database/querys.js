@@ -11,15 +11,15 @@ export const queries = {
     deletePersonal: "UPDATE personal SET estatus = 'INACTIVO' WHERE id_personal = @id_personal",
     
     //Queryes for Notas
-    getAllNotas: "SELECT * FROM nota",
+    getAllNotas: "SELECT * FROM nota WHERE estatus='ACTIVA'",
     newNota:"INSERT INTO nota (nombre, descripcion, fecha_publicacion, estatus, id_personal) VALUES (@nombre, @descripcion, @fecha_publicacion, @estatus, @id_personal)",
-    updateNotaById:"",
-    deleteNotaById:"",
+    updateNotaById:"UPDATE nota SET nombre = @nombre, descripcion = @descripcion WHERE id_nota = @id_nota ",
+    deleteNotaById:"UPDATE nota SET estatus = 'INACTIVA' WHERE id_nota = @id_nota",
 
     //Queryes for Comentarios
     getAllComentarios:"SELECT * FROM comentario",
     newComentario:"INSERT INTO comentario (comentario, id_personal, id_nota) VALUES (@comentario, @id_personal, @id_nota)",
     updateComentarioById:"UPDATE comentario SET comentario = @comentario WHERE id_comentario = @id_comentario",
-    deleteComentarioById:""
+    deleteComentarioById:"DELETE FROM comentario WHERE id_comentario = @id_comentario"
 
 };
